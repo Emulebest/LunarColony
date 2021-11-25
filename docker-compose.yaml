@@ -1,0 +1,13 @@
+version: "3.5"
+services:
+  web:
+    # We don't use Dockerfile build here not to cache the dependencies
+    # since this is a development compose
+    image: "golang:1.17.3-alpine"
+    container_name: dockerdev
+    working_dir: /app
+    volumes:
+      - "./:/app"
+    ports:
+      - "8080:8080"
+    command: go run cmd/main.go
