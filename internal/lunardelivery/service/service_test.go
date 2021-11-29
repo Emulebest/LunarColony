@@ -31,5 +31,5 @@ func TestGetDeliveryTime(t *testing.T) {
 	srvc := service.NewLunarDeliveryService()
 	lst, err := srvc.GetDeliveryTime("2021-11-26 11:28:45 UTC")
 	assert.NoError(t, err)
-	assert.Equal(t, "54-12-20 delta 08:49:43", lst.LST)
+	assert.Equal(t, "54-12-20 nabla 08:49:43", lst.LST)
 }

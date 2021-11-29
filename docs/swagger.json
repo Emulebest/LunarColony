@@ -1,0 +1,74 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a microservice serving lunar mission",
+        "title": "Swagger Lunar API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/lunar/delivery_time": {
+            "post": {
+                "description": "Calculates the delivery time from Earth to Moon based on the UTC and internal parameters",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Calculates the delivery time",
+                "parameters": [
+                    {
+                        "description": "UTC input",
+                        "name": "utc",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.UTCParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lunar Standard Time",
+                        "schema": {
+                            "$ref": "#/definitions/model.LunarTime"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.UTCParam": {
+            "type": "object",
+            "properties": {
+                "utc": {
+                    "type": "string",
+                    "example": "2021-11-26 11:28:45 UTC"
+                }
+            }
+        },
+        "model.LunarTime": {
+            "type": "object",
+            "properties": {
+                "lst": {
+                    "description": "LST stands for Lunar Standard Time",
+                    "type": "string",
+                    "example": "54-12-16 nabla 07:18:10"
+                }
+            }
+        }
+    }
+}

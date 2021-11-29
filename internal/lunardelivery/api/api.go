@@ -13,6 +13,13 @@ type LunarDeliveryController struct {
 }
 
 // GetDeliveryTime works with request parameters and passes on the the service layer
+// @Summary Calculates the delivery time
+// @Description Calculates the delivery time from Earth to Moon based on the UTC and internal parameters
+// @Accept json
+// @Produce json
+// @Param utc body UTCParam true "UTC input"
+// @Success 200 {object} model.LunarTime "Lunar Standard Time"
+// @Router /lunar/delivery_time [post]
 func (l *LunarDeliveryController) GetDeliveryTime(ctx *fasthttp.RequestCtx) {
 	body := ctx.PostBody()
 	utc := &UTCParam{}
@@ -26,6 +33,7 @@ func (l *LunarDeliveryController) GetDeliveryTime(ctx *fasthttp.RequestCtx) {
 	lst, err := l.service.GetDeliveryTime(utc.UTC)
 	if err != nil {
 		ctx.Error(err.Error(), fasthttp.StatusBadRequest)
+		return
 	}
 	zap.S().Debug("Finished getting delivery time")
 	if err = json.NewEncoder(ctx).Encode(lst); err != nil {

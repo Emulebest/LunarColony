@@ -6,3 +6,6 @@ run:
 
 test:
 	go test ./...
+
+gen_docs:
+	swag init -g cmd/main.go

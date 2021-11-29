@@ -18,7 +18,7 @@ const (
 func StringToUTC(utc string) (time.Time, error) {
 	parsed, err := time.Parse(Layout, utc)
 	if err != nil {
-		return time.Time{}, nil
+		return time.Time{}, fmt.Errorf("can't parse %s according to the layout %s", utc, Layout)
 	}
 	return parsed, nil
 }
@@ -57,7 +57,7 @@ func FormatLST(moonSeconds int64) string {
 	}
 	moonYears++
 	// We need to add +1 to years, days, cycles because time on Moon started from Year 1, Day 1, Cycle 1
-	return fmt.Sprintf("%s-%s-%s delta %s:%s:%s", addTrailingZero(moonYears), addTrailingZero(moonDays),
+	return fmt.Sprintf("%s-%s-%s nabla %s:%s:%s", addTrailingZero(moonYears), addTrailingZero(moonDays),
 		addTrailingZero(moonCycles), addTrailingZero(moonHours),
 		addTrailingZero(moonMinutes), addTrailingZero(moonSeconds))
 }

@@ -1,0 +1,51 @@
+basePath: /api/v1
+definitions:
+  api.UTCParam:
+    properties:
+      utc:
+        example: 2021-11-26 11:28:45 UTC
+        type: string
+    type: object
+  model.LunarTime:
+    properties:
+      lst:
+        description: LST stands for Lunar Standard Time
+        example: 54-12-16 nabla 07:18:10
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a microservice serving lunar mission
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Lunar API
+  version: "1.0"
+paths:
+  /lunar/delivery_time:
+    post:
+      consumes:
+      - application/json
+      description: Calculates the delivery time from Earth to Moon based on the UTC
+        and internal parameters
+      parameters:
+      - description: UTC input
+        in: body
+        name: utc
+        required: true
+        schema:
+          $ref: '#/definitions/api.UTCParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Lunar Standard Time
+          schema:
+            $ref: '#/definitions/model.LunarTime'
+      summary: Calculates the delivery time
+swagger: "2.0"

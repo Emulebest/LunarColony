@@ -14,5 +14,5 @@ func TestConvertEarthToMoonTime(t *testing.T) {
 	lunarElapsedSeconds := converters.LunarElapsedSeconds(parsedTime)
 	lunarSeconds := converters.ConvertEarthToMoonSec(lunarElapsedSeconds)
 	lst := converters.FormatLST(lunarSeconds)
-	assert.Equal(t, "54-12-16 delta 07:18:10", lst)
+	assert.Equal(t, "54-12-16 nabla 07:18:10", lst)
 }
